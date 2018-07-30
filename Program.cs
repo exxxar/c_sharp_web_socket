@@ -39,11 +39,15 @@ namespace web_socket
                              );
                             ws.Send(JsonConvert.SerializeObject(request));
                         }
-                                              
 
-                        if (steps >= 2)                        
+
+                        if (steps >= 2)
+                        {
                             ca.update(e.Data);
-
+                            Console.Clear();
+                            ca.sort(CryptoAnaliz.CryptoSortType.NAME);
+                            System.Threading.Thread.Sleep(2000);
+                        }
                         if (steps == 2)
                         {
                             ca.markets.ForEach(m =>

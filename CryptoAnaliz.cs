@@ -9,6 +9,15 @@ namespace web_socket
 {
     class CryptoAnaliz
     {
+        public enum CryptoSortDirection
+        {
+            ASK,DESK
+        }
+        public enum CryptoSortType
+        {
+            ID,NAME,BASEUNIT, QUOTEUNIT,ASKFIXED,BIDFIXED,LOW,HIGH,LAST,BUY,SELL,OPEN,CHANGE,VOLUME,FUNDS,AT
+        }
+
         private CryptoData head;
         private Dictionary<string, CryptoDataElement_tickers> tickers_dataList;
         private CryptoDataElement_at_mining at_mining_data;
@@ -16,6 +25,37 @@ namespace web_socket
         private Dictionary<string, CryptoDataElement_trades> trades_data = new Dictionary<string, CryptoDataElement_trades>();
         public List<String> markets { get; set; } = new List<string>();
 
+        public void sort(CryptoSortType sort=CryptoSortType.NAME)
+        {
+
+            IOrderedEnumerable<KeyValuePair<string, CryptoDataElement_tickers>> items = null;
+
+            switch (sort)
+            {
+                case CryptoSortType.NAME:   items = from pair in tickers_dataList orderby pair.Value.name ascending select pair; break;
+                case CryptoSortType.ID:   items = from pair in tickers_dataList orderby pair.Value.id ascending select pair; break;
+                case CryptoSortType.BASEUNIT: items = from pair in tickers_dataList orderby pair.Value.base_unit ascending select pair; break;
+                case CryptoSortType.QUOTEUNIT: items = from pair in tickers_dataList orderby pair.Value.quote_unit ascending select pair; break;
+                case CryptoSortType.ASKFIXED: items = from pair in tickers_dataList orderby pair.Value.ask_fixed ascending select pair; break;
+                case CryptoSortType.BIDFIXED: items = from pair in tickers_dataList orderby pair.Value.bid_fixed ascending select pair; break;
+                case CryptoSortType.LOW: items = from pair in tickers_dataList orderby pair.Value.low ascending select pair; break;
+                case CryptoSortType.HIGH: items = from pair in tickers_dataList orderby pair.Value.high ascending select pair; break;
+                case CryptoSortType.LAST: items = from pair in tickers_dataList orderby pair.Value.last ascending select pair; break;
+                case CryptoSortType.BUY: items = from pair in tickers_dataList orderby pair.Value.buy ascending select pair; break;
+                case CryptoSortType.SELL: items = from pair in tickers_dataList orderby pair.Value.sell ascending select pair; break;
+                case CryptoSortType.OPEN: items = from pair in tickers_dataList orderby pair.Value.open ascending select pair; break;
+                case CryptoSortType.CHANGE: items = from pair in tickers_dataList orderby pair.Value.change ascending select pair; break;
+                case CryptoSortType.VOLUME: items = from pair in tickers_dataList orderby pair.Value.volume ascending select pair; break;
+                case CryptoSortType.FUNDS: items = from pair in tickers_dataList orderby pair.Value.funds ascending select pair; break;
+                case CryptoSortType.AT: items = from pair in tickers_dataList orderby pair.Value.at ascending select pair; break;
+            }
+            // Display results.
+            foreach (KeyValuePair<string, CryptoDataElement_tickers> pair in items)
+            {
+                Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
+            }
+
+        }
         public void update(String jsonString)
         {
             this.head = JsonConvert.DeserializeObject<CryptoData>(jsonString);
@@ -31,8 +71,10 @@ namespace web_socket
                         .ForEach(k =>
                         {
                             markets.Add(k.Key);
-                            Console.WriteLine("[{0}]=>{1}", k.Key, k.Value);
+                            
                         });
+
+                    
                     break;
                 case "at-mining":
 
