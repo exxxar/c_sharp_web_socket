@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace web_socket
 {
-    class CryptoAnaliz
+   public class CryptoAnaliz
     {
         public enum CryptoSortDirection
         {
@@ -18,8 +18,8 @@ namespace web_socket
             ID,NAME,BASEUNIT, QUOTEUNIT,ASKFIXED,BIDFIXED,LOW,HIGH,LAST,BUY,SELL,OPEN,CHANGE,VOLUME,FUNDS,AT
         }
 
-        private CryptoData head;
-        private Dictionary<string, CryptoDataElement_tickers> tickers_dataList;
+        public CryptoData head;
+        public Dictionary<string, CryptoDataElement_tickers> tickers_dataList;
         private CryptoDataElement_at_mining at_mining_data;
         private Dictionary<string, CryptoDataElement_update> update_data = new Dictionary<string, CryptoDataElement_update>();
         private Dictionary<string, CryptoDataElement_trades> trades_data = new Dictionary<string, CryptoDataElement_trades>();
@@ -59,10 +59,11 @@ namespace web_socket
         public void update(String jsonString)
         {
             this.head = JsonConvert.DeserializeObject<CryptoData>(jsonString);
+            Console.WriteLine(this.head._event);
             switch (head._event.ToLower().Trim())
             {
                 case "tickers":
-
+                    
                     this.tickers_dataList = JsonConvert.DeserializeObject<Dictionary<string, CryptoDataElement_tickers>>(this.head.data);
 
                     this.markets.Clear();
@@ -100,6 +101,10 @@ namespace web_socket
                     else
                         trades_data[head.channel] = cdeT;
 
+                    trades_data.ToList().ForEach(td =>
+                    {
+                        Console.WriteLine("***********************************\n\t{0}}\n***********************************\n\t", td.Value.trades[0].amount);
+                    });
                     break;
                 case "update":
                   
