@@ -45,7 +45,7 @@ namespace web_socket
                             ca.update(e.Data);
                             //Console.Clear();
                             ca.sort(CryptoAnaliz.CryptoSortType.LOW);
-                            System.Threading.Thread.Sleep(2000);
+                            //System.Threading.Thread.Sleep(2000);
                         }
                         if (steps == 2)
                         {

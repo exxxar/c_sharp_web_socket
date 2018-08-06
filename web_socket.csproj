@@ -59,6 +59,7 @@
     <Compile Include="CryptoDataElement_tickers.cs" />
     <Compile Include="CryptoDataElement_trades.cs" />
     <Compile Include="CryptoDataElement_update.cs" />
+    <Compile Include="CryptoDataElement__change.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

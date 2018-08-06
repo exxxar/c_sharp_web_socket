@@ -12,18 +12,18 @@ namespace web_socket
         public string name { get; set; }
         public string base_unit { get; set; }
         public string quote_unit { get; set; }
-        public string ask_fixed { get; set; }
-        public string bid_fixed { get; set; }
-        public string low { get; set; }
-        public string high { get; set; }
-        public string last { get; set; }
-        public string buy { get; set; }
-        public string sell { get; set; }
-        public string open { get; set; }
-        public string change { get; set; }
-        public string volume { get; set; }
-        public string funds { get; set; }
-        public string at { get; set; }
+        public int ask_fixed { get; set; }
+        public int bid_fixed { get; set; }
+        public double low { get; set; }
+        public double high { get; set; }
+        public double last { get; set; }
+        public double buy { get; set; }
+        public double sell { get; set; }
+        public double open { get; set; }
+        public double change { get; set; }
+        public double volume { get; set; }
+        public double funds { get; set; }
+        public long at { get; set; }
 
         public override string ToString()
         {

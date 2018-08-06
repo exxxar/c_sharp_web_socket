@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace web_socket
 {
-    class CryptoDataElement_update
+    public class CryptoDataElement_update
     {
         public String[][] asks { get; set; }
 

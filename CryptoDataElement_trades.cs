@@ -7,7 +7,7 @@ using static web_socket.CryptoDataElement_trades;
 
 namespace web_socket
 {
-    class CryptoDataElement_trades
+    public class CryptoDataElement_trades
     {
         public class Trades
         {
